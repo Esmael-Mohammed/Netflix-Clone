@@ -11,7 +11,7 @@ const Banner = ({category}) => {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNmZiMTk1NTc3YTBhMWU0YTJhYmU5M2NiNzc3ZDQ0YSIsIm5iZiI6MTczMTIyNTgxMS42Nzg4MTczLCJzdWIiOiI2NzMwNjdiMzZiZTMyZTMwNTVkM2FmNTkiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.X04mlQaq8RU_TyiwgS2plqeoIWD_RlPZ2tqDrosJEVc'
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NmNhYzI3M2NmODk4ODdiNWI4YmQwOTEyN2RkZmYxZSIsIm5iZiI6MTczMTU4NTA3MC4xNTAzNjMyLCJzdWIiOiI2NzM1ZTMyYWIwNDI5N2Y3MGM2ODMxZTMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.ULGP7TiSItRAUCBlUKQeG2sE1rBo2pZNr72bLV6PcNY'
       }
     };
     useEffect(()=>{
@@ -50,7 +50,7 @@ const Banner = ({category}) => {
               More Info
             </button>
           </div>
-          <TitleCards />
+          <TitleCards/>
         </div>
       </div>
     </div>

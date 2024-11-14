@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react'
-import './Navbar.css'
+import React, { useEffect} from 'react'
+import './Header.css'
 import logo from '../../assets/image/logo.png'
 import { logout } from '../../Firebase'
 import SearchIcon from '@mui/icons-material/Search';
@@ -8,21 +8,23 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
 
 
-const Navbar = () => {
-  const navRef=useRef();
+const Header = () => {
   useEffect(()=>{
 window.addEventListener('scroll',()=>{
-  if(window.scrollY >=80){
-    navRef.current.classList.add('nav-dark')
-    }else{
-      navRef.current.classList.remove('nav-dark')
-
+  const header = document.querySelector('.header');
+  if (header) {
+    if (window.scrollY >= 80) {
+      header.classList.add('nav-dark');
+    } else {
+      header.classList.remove('nav-dark');
     }
+  }
+  
   }
   )},[])
   return (
-    <div className='navbar' ref={navRef}>
-      <div className="navbar-left">
+    <div className='header' >
+      <div className="header-left">
         <img src={logo} alt="" />
         <ul>
           <li>Netflix</li>
@@ -34,7 +36,7 @@ window.addEventListener('scroll',()=>{
           <li>Browser by Language</li>
         </ul>
       </div>
-      <div className="navbar-right">
+      <div className="header-right">
         <ul>
         <li><SearchIcon/></li>
         <li><NotificationsNoneIcon/></li>
@@ -53,4 +55,4 @@ window.addEventListener('scroll',()=>{
   )
 }
 
-export default Navbar
+export default Header

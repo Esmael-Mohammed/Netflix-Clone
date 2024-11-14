@@ -23,7 +23,7 @@
     color:gray ;
     font-size: 14px;
 }
-@media (max-width>=800) {
+@media (max-width:800px) {
 
     .footer ul{
         grid-template-columns: auto auto;
@@ -31,7 +31,7 @@
         font-size: 14px;
     }
 }  
-@media (max-width<=500) {
+@media (max-width:500px) {
     .footer ul{
         grid-template-columns: auto;
         gap: 8px;

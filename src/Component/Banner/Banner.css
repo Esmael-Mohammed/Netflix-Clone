@@ -61,7 +61,7 @@
 .more-cards{
     padding-left: 6%;
 }
-@media (max-width>=1024) {
+@media (max-width:1024px) {
     .banne-Caption .title-cards{
         display: none;
     }
@@ -70,7 +70,7 @@
     }
     
 }
-@media (max-width>=800){
+@media (max-width:800px){
     .banner-Caption{
         padding-left: 4%;
 
@@ -91,7 +91,7 @@
     }
 
 }
-@media (max-width<=500px){
+@media (max-width:500px){
     .caption-img{
         display: none;
     }
