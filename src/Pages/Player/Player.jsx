@@ -2,6 +2,8 @@ import React, { useEffect, useState} from "react";
 import {useNavigate, useParams} from 'react-router-dom'
 import "./Player.css";
 import back_arrow_icon from "../../assets/image/back_arrow_icon.png";
+import axios from "../../Utility/axios";
+// import axios from "axios";
 const Player = () => {
   const navigate=useNavigate();
   const {id}=useParams();
@@ -11,20 +13,25 @@ const Player = () => {
     published_at:"",
     type:""
   })
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NmNhYzI3M2NmODk4ODdiNWI4YmQwOTEyN2RkZmYxZSIsIm5iZiI6MTczMTU4NTA3MC4xNTAzNjMyLCJzdWIiOiI2NzM1ZTMyYWIwNDI5N2Y3MGM2ODMxZTMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.ULGP7TiSItRAUCBlUKQeG2sE1rBo2pZNr72bLV6PcNY'
-    }
-  };
-  useEffect(()=>{
+  const apiKey = import.meta.env.VITE_TMDB_KEY;
+  useEffect(() => {
+    (async () => {
+      try {
+        
+        const request = await axios.get(`/movie/${id}/videos?api_key=${apiKey}`);
+        console.log("API Response:", request.data);
 
-    fetch(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`, options)
-      .then(res => res.json())
-      .then(res => setData(res.results[0]))
-      .catch(err => console.error(err));
-  },[])
+        setData(request?.data?.results?.[0]);
+        
+      } catch (error) {
+        console.error("Error fetching video data:", error);
+      }
+    })();
+  }, [id]);
+
+  if (!data || !data.key) {
+    return <div>No playable video available.</div>;
+  }
   return (
     <div className="player">
       <img src={back_arrow_icon} alt="" onClick={()=>{

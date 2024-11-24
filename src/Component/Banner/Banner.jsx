@@ -4,26 +4,28 @@ import play_icon from '../../assets/image/play_icon.png'
 import info_icon from '../../assets/image/info_icon.png'
 import TitleCards from "../TitleCards/TitleCards";
 import './Banner.css'
+import requests from "../../Utility/requests";
+import axios from '../../Utility/axios';
 
-const Banner = ({category}) => {
-    const [movie,setMove]=useState([])
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NmNhYzI3M2NmODk4ODdiNWI4YmQwOTEyN2RkZmYxZSIsIm5iZiI6MTczMTU4NTA3MC4xNTAzNjMyLCJzdWIiOiI2NzM1ZTMyYWIwNDI5N2Y3MGM2ODMxZTMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.ULGP7TiSItRAUCBlUKQeG2sE1rBo2pZNr72bLV6PcNY'
-      }
-    };
-    useEffect(()=>{
-      fetch(`https://api.themoviedb.org/3/movie/${category?category:"now_playing"}?language=en-US&page=1`, options)
-      .then(res => res.json())
-      .then(res => setMove(res.results[
-        Math.floor(Math.random()*res.results.length)
-      ]))
-      .catch(err => console.error(err));
-    },[])
+const Banner = () => {
+    const [movie,setMovie]=useState([])
+    useEffect(() => {
+      (async () => {
+          try {
+              const response = await axios.get(requests.fetchNetflixOriginals);
+              console.log(response)
+              if (response.data.results.length > 0) {
+                  setMovie(response.data.results[
+                      Math.floor(Math.random() * response.data.results.length)
+                  ]);
+              }
+          } catch (error) {
+              console.error("Failed to fetch Netflix Originals:", error);
+          }
+      })();
+  }, []);
     const truncate=(str,n)=>{
-        return str?.length >n ?str.substr(0,n-1)+'...':str;
+        return str?.length > n ?str.substr(0,n-1)+'...':str;
     }
   return (
     <div>
@@ -50,7 +52,7 @@ const Banner = ({category}) => {
               More Info
             </button>
           </div>
-          <TitleCards/>
+          <TitleCards title="NETIFLIX ORIGINALS " fetchUrl={requests.fetchNetflixOriginals}/>
         </div>
       </div>
     </div>

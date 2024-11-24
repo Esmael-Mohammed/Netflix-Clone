@@ -5,13 +5,15 @@ import TitleCards from "../../Component/TitleCards/TitleCards";
 import Footer from "../../Component/Footer/Footer";
 import Banner from "../../Component/Banner/Banner";
 import CardList from "../../Component/CardList/CardList";
+import Header from "../../Component/Header/Header";
 
 const Home = () => {
   return (
     <div className="home">
-      <Navbar />
+      <Header/>
       <Banner />
       <CardList/>
+      {/* <TitleCards/> */}
       <Footer />
     </div>
   );
