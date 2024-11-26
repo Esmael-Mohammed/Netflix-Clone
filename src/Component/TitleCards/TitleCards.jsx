@@ -1,12 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./TitleCards.css";
-import { Link } from "react-router-dom";
 import axios from '../../Utility/axios';
-const TitleCards = ({title,fetchUrl}) => {
-  const[data,setData]=useState([])
+import YouTube from 'react-youtube';
+import movieTrailer from 'movie-trailer'
+const base_url = "https://image.tmdb.org/t/p/original";
+
+const TitleCards = ({title,fetchUrl,isLargeRow}) => {
+  const[movies,setMovies]=useState([])
   const [loading,setLoading]=useState(false)
+  const [trailerUrl, setTrailerUrl] = useState('');
   const cardsRef=useRef();
-  
   const handleWheel=(event)=>{
     event.preventDefault();
     cardsRef.current.scrollLeft+=event.deltaY;
@@ -16,7 +19,7 @@ const TitleCards = ({title,fetchUrl}) => {
       try {
         const response=await axios.get(fetchUrl);
         console.log(response.data.results)
-        setData(response?.data?.results || [])
+        setMovies(response?.data?.results || [])
         setLoading(false)
       } catch (error) {
         console.log(error)
@@ -29,28 +32,49 @@ const TitleCards = ({title,fetchUrl}) => {
   if(loading){
     return <div>Loading....</div>
   }
-  console.log(data)
+  const opts = {
+		height: '390',
+		width: "100%",
+		playerVars: {
+			autoplay:1,
+		},
+	}
+  const handleClick = (movie) => {
+		if (trailerUrl) {
+			setTrailerUrl('')
+		} else {
+			movieTrailer(movie?.title || movie?.name || movie?.original_name)
+				.then((url) => {
+					const urlParams = new URLSearchParams(new URL(url).search)
+					// console.log(urlParams)
+					setTrailerUrl(urlParams.get('v'));
+					
+			})
+		}
+	}
   return (
-    <div className="title-cards">
-    <h2>{title}</h2>
-    <div className="card-list" ref={cardsRef}>
-        {data?.length > 0 ? (
-            data?.map((card) => (
-                <Link className="card" key={card?.id} to={`/player/${card?.id}`}>
-                    <img 
-                        src={card?.backdrop_path 
-                            ? `https://image.tmdb.org/t/p/w500${card?.backdrop_path}` 
-                            : '/path/to/fallback-image.jpg'} 
-                        alt={card?.original_title || "Card image"} 
-                    />
-                    <p>{card?.original_title || "Untitled"}</p>
-                </Link>
+<div className="row" >
+			<h1>{title}</h1>
+			<div className="row__posters" ref={cardsRef}>
+      {movies && movies.length > 0 ? ( 
+            movies.map((movie, i) => (
+                <img
+                    onClick={() => handleClick(movie)}
+                    className={`row__poster ${isLargeRow ? "row__posterLarge" : ""}`}
+                    src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
+                    alt={movie?.name || "Movie poster"}  
+                    key={i}
+                    
+                />
             ))
         ) : (
-            <p>No data available</p>
+            <p>No movies available</p> 
         )}
-    </div>
-</div>
+			</div>
+			<div style={{ padding: '15px' }}>
+				{trailerUrl && <YouTube videoId={trailerUrl} opts={opts}/>}
+			</div>
+		</div>
 
   );
 };

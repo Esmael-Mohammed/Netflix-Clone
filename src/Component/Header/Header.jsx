@@ -24,7 +24,7 @@ window.addEventListener('scroll',()=>{
   )},[])
   return (
     <div className='header' >
-      <div className="header-left">
+      <div className="header__left">
         <img src={logo} alt="" />
         <ul>
           <li>Netflix</li>
@@ -36,7 +36,7 @@ window.addEventListener('scroll',()=>{
           <li>Browser by Language</li>
         </ul>
       </div>
-      <div className="header-right">
+      <div className="header__right">
         <ul>
         <li><SearchIcon/></li>
         <li><NotificationsNoneIcon/></li>
@@ -44,7 +44,7 @@ window.addEventListener('scroll',()=>{
         <li><ArrowDropDownCircleOutlinedIcon/></li>
         </ul>
 
-        <div className="drop-down">
+        <div className="drop__down">
           <p onClick={()=>{logout()}}>Sign Out</p>
         </div>
       </div>

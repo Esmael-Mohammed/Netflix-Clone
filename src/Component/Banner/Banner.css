@@ -2,38 +2,43 @@
     position: relative;
 
 }
-.banner-img{
+.banner__img{
     width: 100%;
     mask-image: linear-gradient(to right,transparent,black 75%);
-    -weblit-mask-image: linear-gradient(to right,transparent,black 75%);
+    -weblit-mask-image: linear-gradient(to right,transparent,rgb(236, 27, 27) 75%);
+    background-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.7) 10%,
+      transparent
+    );
 }
-.banner-Caption{
+.banner__Caption{
     position: absolute;
     width: 100%;
     padding-left: 6%;
     bottom: 0;
 
 }
-.caption-title{
+.caption__title{
     width: 90%;
     max-width: 420px;
     margin-bottom: 30px;
 }
-.banner-Caption p{
+.banner__Caption p{
     max-width: 700px;
     font-size: 17px;
     margin-bottom: 20px;
 }
-.banner-btns{
+.banner__btns{
     display: flex;
     gap: 10px;
     margin-bottom: 50px;
 }
-.banner-btns .btn img{
+.banner__btns .btn img{
     width: 25px;
 
 }
-.banner-btns .btn{
+.banner__btns .btn{
     border: 0;
     outline: 0;
     padding: 8px 20px;
@@ -47,7 +52,7 @@
     cursor: pointer;
 
 }
-.banner-btns .btn.dark-btn{
+.banner__btns .btn.dark__btn{
     columns: #fff;
     background: #6d6d6eb3;
 }
@@ -55,47 +60,47 @@
 .banner .btn:hover{
     background: #ffffffbf;
 }
-.banner .btn.dark-btn:hover{
+.banner .btn.dark__btn:hover{
     background:#6d6a6e66;
 }
-.more-cards{
+.more__cards{
     padding-left: 6%;
 }
 @media (max-width:1024px) {
-    .banne-Caption .title-cards{
+    .banne__Caption .title__cards{
         display: none;
     }
-    .banner-btns{
+    .banner__btns{
         margin-bottom: 30px;
     }
     
 }
 @media (max-width:800px){
-    .banner-Caption{
+    .banner__Caption{
         padding-left: 4%;
 
     }
-    .caption-img{
+    .caption__img{
         margin-bottom: 10px;
         width: 40%;
     }
-    .banner-Caption p{
+    .banner__Caption p{
         font-size: 12px;
         max-block-size: 10px;
     }
-    .banner-btns img{
+    .banner__btns img{
         width: 20px;
     }
-    .more-cards{
+    .more__cards{
      padding-left: 4%;   
     }
 
 }
 @media (max-width:500px){
-    .caption-img{
+    .caption__img{
         display: none;
     }
-    .banner-btns img{
+    .banner__btns img{
         width: 15px;
     }
     .btn{

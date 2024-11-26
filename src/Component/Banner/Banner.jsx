@@ -33,26 +33,26 @@ const Banner = () => {
         <img
           src={`https://image.tmdb.org/t/p/w500` + movie.backdrop_path}
           alt=""
-          className="banner-img"
+          className="banner__img"
         />
-        <div className="banner-Caption">
-          <h1 className="caption-title">
+        <div className="banner__Caption">
+          <h1 className="caption__title">
             {movie?.title || movie?.name || movie?.orginal_name}
           </h1>
           <p>
             {truncate(movie?.overview,150)}
           </p>
-          <div className="banner-btns">
+          <div className="banner__btns">
             <button className="btn">
               <img src={play_icon} alt="" />
               Play
             </button>
-            <button className="btn dark-btn">
+            <button className="btn dark__btn">
               <img src={info_icon} alt="" />
               More Info
             </button>
           </div>
-          <TitleCards title="NETIFLIX ORIGINALS " fetchUrl={requests.fetchNetflixOriginals}/>
+          <TitleCards title="NETIFLIX ORIGINALS" fetchUrl={requests.fetchNetflixOriginals} isLargeRow={true}/>
         </div>
       </div>
     </div>
